@@ -1,0 +1,9 @@
+{{extend 'layout.html'}}
+<table style='border: 1px solid black'>
+    {{for row in rows:}}
+    <tr>
+        <td style='width: 20%'><a style='color:black' href="{{=URL('status', args=[row.id, row.status])}}">{{=colors.status}}</a></td>
+        {{pass}}
+        <td ><th style='background:{{=color.color}}'>{{=form}}</th></td>
+    </tr>
+</table>

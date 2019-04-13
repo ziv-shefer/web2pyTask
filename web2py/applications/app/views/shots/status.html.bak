@@ -1,0 +1,17 @@
+{{extend 'layout.html'}}
+<head>
+</head>
+<body>
+<table style='float: left; border: 1px solid black' height="627">
+    {{x=0}}
+    {{for row in rows:}}
+    <tr >
+        <td style='width: 40%; height:50%' ><a style='color:{{=lst[x]}}' href="{{=URL('status', args=[row.id, row.status])}}">{{=row.name}}</a></td>
+        {{x=x+1}}
+        {{pass}}
+    </tr>
+</table>
+<div style='display: inline-block; background:{{=color.color}}; border: 1px solid black' height="600">
+    {{=form}}
+</div>
+</body>

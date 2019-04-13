@@ -1,0 +1,29 @@
+def status():
+    if request.args(1):
+        r = request.args(1).upper()
+    else:
+        r = 'DEFAULT'
+    lst = []
+    colors = db(db.colors).select()
+    color = db(db.colors.status == r).select().first()
+    record = db.Shots(request.args(0))
+    rows=db(db.Shots).select()
+    for row in rows:
+        for c in colors:
+            if row.status.upper()[0:3] == c.status.upper()[0:3]:
+                lst.append(c.color)
+    db.Shots.id.readable = False
+    form=SQLFORM(db.Shots, record)
+    if form.process().accepted:
+           response.flash = 'form accepted'
+    elif form.errors:
+           response.flash = 'form has errors'
+    return locals()
+
+def display_form():
+    form=SQLFORM(db.colors,request.args(0))
+    if form.process().accepted:
+           response.flash = 'form accepted'
+    elif form.errors:
+           response.flash = 'form has errors'
+    return dict(form=form)
